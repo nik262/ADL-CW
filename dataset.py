@@ -3,9 +3,11 @@ import numpy as np
 import torch
 
 from torch.utils import data
+from scipy import signal
+import torch.nn.functional as F
 
 class MagnaTagATune(data.Dataset):
-    def __init__(self, dataset_path, samples_path):
+    def __init__(self, dataset_path, samples_path, global_min=None, global_max=None ):
         """
         Given the dataset path, create the MagnaTagATune dataset. Creates the
         variable self.dataset which is a list of 3-element tuples, each of the
@@ -19,9 +21,13 @@ class MagnaTagATune(data.Dataset):
         Args:
             dataset_path (str): Path to train_labels.pkl or val_labels.pkl
         """
+        #dataset_path = "/mnt/storage/scratch/gv20319/MagnaTagATune/annotations"
         print(f"Loading data from {dataset_path}...")
         self.dataset = pd.read_pickle(dataset_path)
         self.samples_path = samples_path
+        self.global_min = global_min
+        self.global_max = global_max
+
 
     def __getitem__(self, index):
         """
@@ -40,8 +46,15 @@ class MagnaTagATune(data.Dataset):
 
         filename = data['file_path']
         samples = torch.from_numpy(np.load(f"{self.samples_path}/{filename}"))
+
         label = torch.FloatTensor(data['label'])
         samples = samples.view(10, -1).contiguous() # Create 10 subclips
+
+
+
+        if self.global_min is not None and self.global_max is not None:
+            samples = ((samples - self.global_min) / (self.global_max - self.global_min))*2 - 1
+        
 
         return filename, samples.unsqueeze(1), label
 
