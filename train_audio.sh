@@ -15,4 +15,4 @@ module purge
 # load in the module dependencies for this script
 module load "languages/anaconda3/2021-3.8.8-cuda-11.1-pytorch"
 
-python model.py --learning-rate 0.05 --momentum 0.94 --epochs 20 --extension False
+python train_audio.py --learning-rate 0.05 --momentum 0.94 --epochs 20 --extension False
