@@ -14,15 +14,15 @@ For samples
 
 For annotations:
 1. I created a new pkl file called validation.pkl
-2. I then moved all files audio files that have part in it to this new pkl
+2. I then moved all files audio files that have part "a,b,c,d,e,f" in it to this new pkl
 
-Once this is done there is a small problem where the file_path in test_labels.pkl starts with val/d, val/e, val/f
-I ran a python script that went through each file and did a str.replace change this to valtest/d etc.. as it is in test.
+Once this is done there is a small problem where the file_path in val_labels.pkl starts with val/d, val/e, val/f
+I ran a python script that went through each file and did a str.replace remove this so it just starts with d etc..
 
-Now the data is in the correct format, it can be passed in as an arguemnt in train.sh
+I also did the same for train_labels.pkl and validation.pkl all files that start with the part segement at the start of the files were removed using str.replace
 
 
-IMP STEPS TO RUN THE ACTUAL TRAIN_AUDIO.py
+Now the data is in the correct format, you will have to change the file paths to these datasets in my code. I have listed the steps below:
 
 the dataset paths in the code need to be redirected to the path that is being used :
 
@@ -47,9 +47,10 @@ and samples to look something like this
 4. for lines 116, change the datasetpath to include the train_labels.pkl file, and change samplespath with /MagnaTagATune/samples/train
 5. for lines 120, change the datasetpath to include the validation.pkl file, and change samplespath with /MagnaTagATune/samples/val
 6.for lines 124, change the datasetpath to include the valtest.pkl file, and change samplespath with /MagnaTagATune/samples/train
-7.
-8.
+
 
 
 if you want to test the extension part of the code add the --extension True 
 for different lengths and strides use --length and --stride 
+
+check the args parser for more parameters that can be added 

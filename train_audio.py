@@ -45,14 +45,6 @@ parser.add_argument("--length", default=256, type=int, help="length")
 parser.add_argument("--stride", default=256, type=int, help="stride")
 
 
-parser.add_argument("--datasetpath_train", default='/mnt/storage/scratch/gv20319/MagnaTagATune/annotations/train_labels.pkl', type=str, help="path")
-parser.add_argument("--datasetpath_validation", default='/mnt/storage/scratch/gv20319/MagnaTagATune/annotations/validation.pkl', type=str, help="path")
-parser.add_argument("--datasetpath_labels", default='/mnt/storage/scratch/gv20319/MagnaTagATune/annotations/val_labels.pkl', type=str, help="path")
-
-parser.add_argument("--samplespath_train", default='/mnt/storage/scratch/gv20319/MagnaTagATune/samples/train', type=str, help="path")
-parser.add_argument("--samplespath_validation", default='/mnt/storage/scratch/gv20319/MagnaTagATune/samples/val', type=str, help="path")
-parser.add_argument("--samplespath_labels", default='/mnt/storage/scratch/gv20319/MagnaTagATune/samples/valtest', type=str, help="path")
-
 
 parser.add_argument(
     "--batch-size",
